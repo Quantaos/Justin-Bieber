@@ -14,12 +14,7 @@
     align-items: center;
     justify-content: center;
     gap: 22px;
-    background:
-      radial-gradient(circle at 18% 18%, rgba(255,110,196,.22), transparent 28%),
-      radial-gradient(circle at 84% 78%, rgba(77,214,255,.2), transparent 30%),
-      linear-gradient(135deg, #120722, #26103d 48%, #090512);
-    background-size: 140% 140%;
-    animation: backgroundDrift 14s ease-in-out infinite alternate;
+    background: linear-gradient(135deg, #120722, #26103d 48%, #090512);
     font-family: 'Segoe UI', 'Arial Unicode MS', Arial, sans-serif;
     overflow-x: hidden;
     overflow-y: auto;
@@ -159,11 +154,6 @@
     to { background-position: 300% center; }
   }
 
-  @keyframes backgroundDrift {
-    from { background-position: 0% 20%; }
-    to { background-position: 100% 80%; }
-  }
-
   /* ===== Trái tim ===== */
   .heart {
     position: relative;
@@ -172,15 +162,14 @@
     border: 7px solid rgba(255,255,255,.75);
     border-radius: 50%;
     background: #24103b center / cover no-repeat;
-    animation:
-      photoPulse 2.2s ease-in-out infinite,
-      hueShift 8s linear infinite;
+    animation: photoPulse 2.2s ease-in-out infinite;
     box-shadow:
       0 0 35px rgba(255, 45, 149, 0.75),
       0 0 100px rgba(164, 80, 255, 0.55);
     overflow: hidden;
     z-index: 1;
     transition: background-image .8s ease, transform .8s ease;
+    will-change: transform;
   }
 
   .heart::before {
@@ -221,15 +210,8 @@
     border-radius: 50%;
     background: conic-gradient(from 0deg, #ff2d95, #a450ff, #4dd6ff, #ff2d95);
     filter: blur(60px);
-    opacity: 0.35;
-    animation: spin 6s linear infinite;
+    opacity: 0.25;
     z-index: -1;
-  }
-
-  @keyframes hueShift {
-    0%   { background-position: 0% 50%; filter: hue-rotate(0deg); }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; filter: hue-rotate(360deg); }
   }
 
   @keyframes photoPulse {
@@ -241,13 +223,9 @@
     to { transform: rotate(360deg); }
   }
 
-  @keyframes spin {
-    to { transform: rotate(360deg); }
-  }
-
   /* Particle bay lên */
   .particle {
-    position: absolute;
+    position: fixed;
     bottom: -10px;
     width: 8px;
     height: 8px;
@@ -255,6 +233,7 @@
     background: radial-gradient(circle, #ff8fd0, transparent);
     animation: float linear infinite;
     opacity: 0;
+    pointer-events: none;
   }
 
   @keyframes float {
@@ -277,7 +256,7 @@
   <h1>Album Justin Bieber</h1>
 
   <section class="music-player" aria-label="Trình phát nhạc miễn phí">
-    <span class="track-label">List Music</span>
+    <span class="track-label">Free music playlist</span>
     <div class="track-title" id="trackTitle">Baby</div>
     <div class="progress-row">
       <span id="elapsed">0:00</span>
